@@ -2,7 +2,10 @@
 
 module Enumerable
   def my_each
-    # TODO: Complete function
+    items = to_a
+    for i in 0...items.size
+      yield(*items[i])
+    end
   end
 
   def my_each_with_index
