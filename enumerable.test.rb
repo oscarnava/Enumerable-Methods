@@ -80,8 +80,12 @@ def hash_tests(test_hash)
   true
 end
 
+assert_equal(multiply_els([2, 4, 5]), 40)
+
 array_tests [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 array_tests [1, 10, 3, 4, 2, 7, 8, 9, 5, 6]
+array_tests([])
+
 puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'
 puts '| Array tests were successful! |'
 puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'
@@ -89,6 +93,8 @@ puts ' '
 
 hash_tests one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10
 hash_tests one: 10, six: 5, seven: 4, nine: 2, ten: 1, zero: 99, eight: 3, four: 7, five: 6, two: 9, three: 8
+hash_tests({})
+
 puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'
 puts '| Hash tests were successful!  |'
 puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'

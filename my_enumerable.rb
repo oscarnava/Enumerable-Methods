@@ -65,3 +65,7 @@ module Enumerable
     memo
   end
 end
+
+def multiply_els(values)
+  values.my_inject { |acc, n| acc * n }
+end
