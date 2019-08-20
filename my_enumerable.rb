@@ -4,13 +4,13 @@ module Enumerable
   def my_each
     items = to_a
     for i in 0...items.size
-      yield(*items[i])
+      yield items[i]
     end
   end
 
   def my_each_with_index
     idx = -1
-    my_each { |*vals| yield(*vals, idx += 1) }
+    my_each { |val| yield(val, idx += 1) }
   end
 
   def my_select

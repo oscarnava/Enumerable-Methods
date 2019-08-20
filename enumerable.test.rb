@@ -40,10 +40,10 @@ def hash_tests test_hash
   print 'Testing hash: ', test_hash, "\n"
 
   enum = test_hash.each
-  test_hash.my_each { |*parms| assert_equal parms, enum.next }
+  test_hash.my_each { |parms| assert_equal parms, enum.next }
 
   enum = test_hash.each_with_index
-  test_hash.my_each_with_index { |*parms, idx| assert_equal [parms, idx], enum.next }
+  test_hash.my_each_with_index { |parms, idx| assert_equal [parms, idx], enum.next }
 
   assert_equal(test_hash.my_select { |_, val| val.odd? }, test_hash.select { |_, val| val.odd? })
 
