@@ -2,7 +2,7 @@
 
 require './my_enumerable.rb'
 require 'test/unit'
-extend Test::Unit::Assertions
+extend Test::Unit::Assertions # rubocop:disable Style/MixinUsage
 
 def array_tests(test_array)
   # print 'Testing array: ', test_array, "\n"
@@ -74,7 +74,8 @@ def hash_tests(test_hash)
   assert_equal(test_hash.my_map { |key, n| key.object_id * n }, test_hash.map { |key, n| key.object_id * n })
   assert_equal(test_hash.my_map(my_hash_proc), test_hash.map(&my_hash_proc))
 
-  assert_equal(test_hash.my_inject { |a, b| a[1] += b[1]; a }, test_hash.inject { |a, b| a[1] += b[1]; a })
+  assert_equal(test_hash.my_inject { |a, b| a[1] += b[1]; a }, # rubocop:disable Style/Semicolon
+               test_hash.inject { |a, b| a[1] += b[1]; a }) # rubocop:disable Style/Semicolon
   assert_equal(test_hash.my_inject(1000) { |acc, pair| acc - pair.last },
                test_hash.inject(1000) { |acc, pair| acc - pair.last })
   true

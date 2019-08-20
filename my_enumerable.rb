@@ -3,7 +3,7 @@
 module Enumerable
   def my_each
     items = to_a
-    for i in 0...items.size
+    for i in 0...items.size # rubocop:disable Style/For
       yield items[i]
     end
   end
