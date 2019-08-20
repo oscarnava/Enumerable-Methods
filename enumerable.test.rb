@@ -4,8 +4,8 @@ require './my_enumerable.rb'
 require 'test/unit'
 extend Test::Unit::Assertions
 
-def array_tests test_array
-  print 'Testing array: ', test_array, "\n"
+def array_tests(test_array)
+  # print 'Testing array: ', test_array, "\n"
 
   enum = test_array.each
   test_array.my_each { |parm| assert_equal parm, enum.next }
@@ -34,10 +34,17 @@ def array_tests test_array
 
   assert_equal(test_array.my_map { |n| n**n }, test_array.map { |n| n**n })
   assert_equal(test_array.my_map(my_array_proc), test_array.map(&my_array_proc))
+
+  assert_equal(test_array.my_inject { |acc, n| acc + n }, test_array.inject { |acc, n| acc + n })
+  assert_equal(test_array.my_inject(1000) { |acc, n| acc - n }, test_array.inject(1000) { |acc, n| acc - n })
+  assert_equal(test_array.my_inject(&:+), test_array.inject(&:+))
+  assert_equal(test_array.my_inject(1000, &:*), test_array.inject(1000, &:*))
+
+  true
 end
 
-def hash_tests test_hash
-  print 'Testing hash: ', test_hash, "\n"
+def hash_tests(test_hash)
+  # print 'Testing hash: ', test_hash, "\n"
 
   enum = test_hash.each
   test_hash.my_each { |parms| assert_equal parms, enum.next }
@@ -66,10 +73,22 @@ def hash_tests test_hash
 
   assert_equal(test_hash.my_map { |key, n| key.object_id * n }, test_hash.map { |key, n| key.object_id * n })
   assert_equal(test_hash.my_map(my_hash_proc), test_hash.map(&my_hash_proc))
+
+  assert_equal(test_hash.my_inject { |a, b| a[1] += b[1]; a }, test_hash.inject { |a, b| a[1] += b[1]; a })
+  assert_equal(test_hash.my_inject(1000) { |acc, pair| acc - pair.last },
+               test_hash.inject(1000) { |acc, pair| acc - pair.last })
+  true
 end
 
-array_tests [1,2,3,4,5,6,7,8,9,10]
-array_tests [1,10,3,4,2,7,8,9,5,6]
+array_tests [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+array_tests [1, 10, 3, 4, 2, 7, 8, 9, 5, 6]
+puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'
+puts '| Array tests were successful! |'
+puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'
+puts ' '
 
 hash_tests one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10
 hash_tests one: 10, six: 5, seven: 4, nine: 2, ten: 1, zero: 99, eight: 3, four: 7, five: 6, two: 9, three: 8
+puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'
+puts '| Hash tests were successful!  |'
+puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'

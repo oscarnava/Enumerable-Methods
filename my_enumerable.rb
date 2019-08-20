@@ -23,6 +23,7 @@ module Enumerable
     result
   end
 
+  # TODO: Accept patterns?
   def my_all?
     my_each do |*vals|
       return false unless yield(*vals)
@@ -57,7 +58,10 @@ module Enumerable
     result
   end
 
-  def my_inject
-    # TODO: Complete function
+  def my_inject(memo = nil)
+    my_each do |val|
+      memo = memo.nil? ? val : yield(memo, val)
+    end
+    memo
   end
 end
