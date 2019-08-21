@@ -25,16 +25,16 @@ module Enumerable
   # TODO: Accept patterns?
   def my_all?(&block)
     block = proc { |obj| obj } unless block_given?
-    my_each do |*vals|
-      return false unless block[*vals]
+    my_each do |vals|
+      return false unless block[vals]
     end
     true
   end
 
   def my_any?(&block)
     block = proc { |obj| obj } unless block_given?
-    my_each do |*vals|
-      return true if block[*vals]
+    my_each do |vals|
+      return true if block[vals]
     end
     false
   end
@@ -46,10 +46,10 @@ module Enumerable
   def my_count(value = nil, &block)
     return size if value.nil? && !block_given?
 
-    block = proc { |*val| value.nil? || val == [value] } unless block_given?
+    block = proc { |val| value.nil? || val == value } unless block_given?
     count = 0
-    my_each do |*vals|
-      count += 1 if block[*vals]
+    my_each do |vals|
+      count += 1 if block[vals]
     end
     count
   end
@@ -57,7 +57,7 @@ module Enumerable
   def my_map(proc = nil, &block)
     block = proc if proc
     result = []
-    my_each { |*vals| result.push block[*vals] }
+    my_each { |vals| result.push block[vals] }
     result
   end
 
