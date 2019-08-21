@@ -2,9 +2,8 @@
 
 module Enumerable
   def my_each
-    items = to_a
-    for i in 0...items.size # rubocop:disable Style/For
-      yield items[i]
+    for item in self # rubocop:disable Style/For
+      yield item
     end
   end
 
