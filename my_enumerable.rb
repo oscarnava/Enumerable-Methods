@@ -14,8 +14,8 @@ module Enumerable
 
   def my_select
     result = []
-    my_each do |*vals|
-      result.push(vals.size > 1 ? vals : vals.first) if yield(*vals)
+    my_each do |vals|
+      result.push(vals) if yield(vals)
     end
     return result.to_h if is_a? Hash
 
