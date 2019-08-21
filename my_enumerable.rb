@@ -44,6 +44,8 @@ module Enumerable
   end
 
   def my_count(value = nil, &block)
+    return size if value.nil? && !block_given?
+
     block = proc { |*val| value.nil? || val == [value] } unless block_given?
     count = 0
     my_each do |*vals|
