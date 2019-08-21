@@ -56,12 +56,15 @@ def hash_tests(test_hash)
 
   assert_equal(test_hash.my_all? { |_, val| val.positive? }, test_hash.all? { |_, val| val.positive? })
   assert_equal(test_hash.my_all? { |_, val| val > 7 }, test_hash.all? { |_, val| val > 7 })
+  assert_equal(test_hash.my_all?, test_hash.all?)
 
   assert_equal(test_hash.my_any? { |_, val| val.positive? }, test_hash.any? { |_, val| val.positive? })
   assert_equal(test_hash.my_any? { |_, val| val.even? }, test_hash.any? { |_, val| val.even? })
+  assert_equal(test_hash.my_any?, test_hash.any?)
 
   assert_equal(test_hash.my_none? { |_, val| val.negative? }, test_hash.none? { |_, val| val.negative? })
   assert_equal(test_hash.my_none? { |_, val| val.odd? }, test_hash.none? { |_, val| val.odd? })
+  assert_equal(test_hash.my_none?, test_hash.none?)
 
   assert_equal(test_hash.my_count, test_hash.count)
 
@@ -86,6 +89,10 @@ assert_equal(multiply_els([2, 4, 5]), 40)
 array_tests [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 array_tests [1, 10, 3, 4, 2, 7, 8, 9, 5, 6]
 array_tests([])
+
+assert_equal([nil, true, 99].my_all?, [nil, true, 99].all?)
+assert_equal([nil, true, 99].my_any?, [nil, true, 99].any?)
+assert_equal([nil, false, true].my_none?, [nil, false, true].none?)
 
 puts '+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+'
 puts '| Array tests were successful! |'
